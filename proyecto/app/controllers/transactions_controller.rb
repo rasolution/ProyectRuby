@@ -24,16 +24,26 @@ class TransactionsController < ApplicationController
   # POST /transactions
   # POST /transactions.json
   def create
-    @transaction = Transaction.new(transaction_params)
-
-    respond_to do |format|
-      if @transaction.save
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
-        format.json { render :show, status: :created, location: @transaction }
+    @result
+    @transaction = Transaction.new(params.require(:transaction).permit(:offert_product_id, :require_product_id))
+    @productoffert=Product.where(:id => @transaction.offert_product_id).first
+    @productrequire=Product.where(:id => @transaction.require_product_id).first
+    if(@productoffert== nil && @productrequire==nil)
+        @result={status:422 , message:'Producto offer id or require doesnt exits'}
+    else
+      if(Transaction.where(:offert_product_id => @transaction.offert_product_id).where(:require_product_id=>@transaction.require_product_id).first)
+        @result={status:422 , message:'There is already transaction with that arguments'}
       else
-        format.html { render :new }
-        format.json { render json: @transaction.errors, status: :unprocessable_entity }
+        if @transaction.save
+          @result={status:200 , message:'Transaction created'}
+        else
+          @result={status:200 , message:'There was an a error created the transactions'}
+        end
       end
+    end
+    respond_to do |format|
+      format.html { render json: @result }
+      format.json { render json: @result }
     end
   end
 

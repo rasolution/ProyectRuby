@@ -138,6 +138,51 @@ var url="http://localhost:3000/"
                 }
             });
         });
+        $("#get_transactions").bind("click", function () {
+            var id = document.getElementById('formtransactionid').value
+            console.log("you press" + id);
+            console.log();
+            var tempurl = url;
+            if (id == "") {
+                tempurl += "transactions.json";
+            }
+            else {
+                tempurl += "transactions/" + id + ".json";
+            }
+            $.ajax({
+                url: tempurl,
+                method: "GET",
+                headers: { Authorization: localStorage.getItem('authtoken')},
+                success: function (data) {
+                    var requestdata = JSON.stringify(data);
+                    $('#transactions_result').val(requestdata);
+                },
+                error:function( jqXHR, textStatus ) {
+                    $('#transactions_result').val(jqXHR.status+" The code you input doesnt exist or Something went wrong");
+                    console.log(textStatus);
+                }
+            });
+        });
+
+        $("#new_transaction").bind("click", function () {
+            var formdata = $("#form_newtransaction").serialize();
+            var tempurl = url;
+            tempurl += "transactions.json";
+            $.ajax({
+                url: tempurl,
+                method: "POST",
+                data: formdata,
+                dataType: "json",
+                headers: { Authorization: localStorage.getItem('authtoken')},
+                success: function (data) {
+                    $('#createtransaction_result').val(JSON.stringify(data))
+                },
+                error:function( jqXHR, textStatus ) {
+                    $('#createtransaction_result').val(jqXHR.status+" Something went wrong");
+                    console.log(textStatus);
+                }
+            });
+        });
     }
 
 

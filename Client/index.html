@@ -5,7 +5,7 @@
     <link rel="stylesheet" type="text/css" href="Css/style.css"/>
     <title></title>
 </head>
-<body>
+<body onload="javascript:cambiarPestanna(pestanas,pestana1);javascript:fnButtons();">
 
         <h1>Login</h1>
         <form id="form_login" method="post">
@@ -40,7 +40,7 @@
                 </ul>
             </div>
 
-            <body onload="javascript:cambiarPestanna(pestanas,pestana1);javascript:fnButtons();">
+
 
             <div id="contenidopestanas">
                 <div id="cpestana1">
@@ -95,6 +95,32 @@
                     </form>
                 </div>
             </div>
+        </div>
+
+            <h2>Transactions</h2>
+
+            <input type="text" id="formtransactionid" />
+            <button id="get_transactions" type="button">Get Transactions</button>
+            <br/>
+            <textarea name="" id="transactions_result"></textarea>
+            <br/>
+            <br/>
+            <br/>
+        <form accept-charset="UTF-8" method="post" id="form_newtransaction">
+            <label for="transaction_offert_product_id">Offert product</label>
+            <br/>
+            <input type="number" name="transaction[offert_product_id]" id="transaction_offert_product_id" />
+            <br/>
+            <label for="transaction_require_product_id">Require product</label>
+            <br/>
+            <input type="text" name="transaction[require_product_id]" id="transaction_require_product_id" />
+            <br/>
+            <br/>
+            <button type="button" id="new_transaction" >Create Transaction</button>
+            <br/>
+            <br/>
+            <textarea name="" id="createtransaction_result"></textarea>
+        </form>
 
 </body>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
@@ -102,3 +128,4 @@
     fnButtons();
 </script>
 </html>
+
