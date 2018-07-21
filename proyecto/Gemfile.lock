@@ -76,11 +76,11 @@ GEM
     mini_portile2 (2.3.0)
     minitest (5.11.3)
     multi_json (1.13.1)
-    mysql2 (0.5.1)
-    mysql2 (0.5.1-x64-mingw32)
-    nokogiri (1.8.3)
+    mysql2 (0.5.2)
+    mysql2 (0.5.2-x64-mingw32)
+    nokogiri (1.8.4)
       mini_portile2 (~> 2.3.0)
-    nokogiri (1.8.3-x64-mingw32)
+    nokogiri (1.8.4-x64-mingw32)
       mini_portile2 (~> 2.3.0)
     rack (1.6.10)
     rack-cors (1.0.2)
@@ -115,7 +115,7 @@ GEM
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
     rdoc (4.3.0)
-    sass (3.5.6)
+    sass (3.5.7)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -148,7 +148,7 @@ GEM
     turbolinks-source (5.1.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    uglifier (4.1.12)
+    uglifier (4.1.15)
       execjs (>= 0.3.0, < 3)
     web-console (2.3.0)
       activemodel (>= 4.0)
@@ -177,4 +177,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.16.2
+   1.16.3
