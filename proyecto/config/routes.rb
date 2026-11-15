@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "up", to: ->(_env) { [200, { "content-type" => "application/json" }, ['{"status":"ok"}']] }
   resources :transactions
 
   get 'welcome/index'

@@ -37,3 +37,10 @@ vendor/bundle/
 tmp/cache/
 log/*.log
 # local-development:end
+
+# Rails local: dependencias, datos y activos generados
+/proyecto/vendor/bundle/
+/proyecto/.bundle/
+/proyecto/storage/
+/proyecto/tmp/
+/proyecto/public/assets/
