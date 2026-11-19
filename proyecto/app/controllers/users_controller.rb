@@ -1,74 +1,77 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
-  # GET /users
-  # GET /users.json
   def index
-    @users = User.all
+    @users = User.where(id: current_user.id)
   end
 
-  # GET /users/1
-  # GET /users/1.json
-  def show
-  end
+  def show; end
+  def edit; end
 
-  # GET /users/new
   def new
     @user = User.new
   end
 
-  # GET /users/1/edit
-  def edit
-  end
-
-  # POST /users
-  # POST /users.json
   def create
-    @user = User.new(user_params)
-
+    return unless valid_password_input?
+    @user = User.new(user_params.except(:password_challenge))
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to @user, status: :see_other, notice: 'Cuenta creada.' }
         format.json { render :show, status: :created, location: @user }
       else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /users/1
-  # PATCH/PUT /users/1.json
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    return unless valid_password_input?
+    attributes = user_params.to_h
+    challenge = attributes.delete('password_challenge')
+    if attributes['password'].present? && !@user.authenticate_compatible(challenge.to_s)
+      render json: { errors: ['La contraseña actual no es correcta.'] }, status: :unprocessable_entity
+      return
+    end
+    attributes.delete('password') if attributes['password'].blank?
+    attributes.delete('password_confirmation') if attributes['password_confirmation'].blank?
+    password_changed = attributes['password'].present?
+    if @user.update(attributes)
+      ApiKey.where(username: @user.username).delete_all if password_changed
+      render :show, status: :ok
+    else
+      render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.json
   def destroy
-    @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
-      format.json { head :no_content }
+    User.transaction do
+      ApiKey.where(username: @user.username).delete_all
+      @user.destroy!
     end
+    head :no_content
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(:username, :password, :token)
+  def set_user
+    @user = User.where(id: current_user.id).find(record_id)
+  end
+
+  def user_params
+    params.require(:user).permit(:username, :password, :password_confirmation, :password_challenge)
+  end
+
+  def valid_password_input?
+    invalid = [:password, :password_confirmation, :password_challenge].any? do |key|
+      value = user_params[key]
+      !value.nil? && (!value.is_a?(String) || value.include?("\0"))
     end
+    if invalid
+      render json: { errors: ['La contraseña debe ser texto válido sin bytes nulos.'] }, status: :unprocessable_entity
+      return false
+    end
+    true
+  end
 end

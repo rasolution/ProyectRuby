@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get 'errors/internal_server_error'
 
   match 'login', to: 'welcome#signin',     via: 'post'
-  match 'logout', to: 'welcome#signout',   via: 'get'
+  match 'logout', to: 'welcome#signout', via: [:delete, :get]
 
   match '/404', to: 'errors#file_not_found', via: :all
   match '/422', to: 'errors#unprocessable', via: :all

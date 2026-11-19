@@ -30,11 +30,11 @@ class LocalSmokeTest < ActionDispatch::IntegrationTest
   end
 
   test "credentials from another user do not reuse the first users token" do
-    first = User.create!(username: "smoke-first", password: "first")
-    second = User.create!(username: "smoke-second", password: "second")
-    post "/login", params: { user: { username: first.username, password: "first" } }, as: :json
+    first = User.create!(username: "smoke-first", password: "first-secret")
+    second = User.create!(username: "smoke-second", password: "second-secret")
+    post "/login", params: { user: { username: first.username, password: "first-secret" } }, as: :json
     first_token = response.parsed_body.fetch("auth_token")
-    post "/login", params: { user: { username: second.username, password: "second" } }, as: :json
+    post "/login", params: { user: { username: second.username, password: "second-secret" } }, as: :json
     second_token = response.parsed_body.fetch("auth_token")
     assert_not_equal first_token, second_token
     assert_equal second.username, ApiKey.find_by!(access_token: second_token).username

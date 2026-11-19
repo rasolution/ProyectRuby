@@ -1,11 +1,6 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  username: MyString
-  password: MyString
-  token: MyString
-
+  username: fixture-one
+  password_digest: <%= BCrypt::Password.create('Fixture-password-one', cost: BCrypt::Engine::MIN_COST) %>
 two:
-  username: MyString
-  password: MyString
-  token: MyString
+  username: fixture-two
+  password_digest: <%= BCrypt::Password.create('Fixture-password-two', cost: BCrypt::Engine::MIN_COST) %>

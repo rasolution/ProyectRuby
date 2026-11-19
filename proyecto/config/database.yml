@@ -5,11 +5,11 @@ default: &default
 
 development:
   <<: *default
-  database: storage/development.sqlite3
+  database: <%= ENV.fetch("RAILS_DEVELOPMENT_DATABASE_PATH", "storage/development.sqlite3") %>
 
 test:
   <<: *default
-  database: storage/test.sqlite3
+  database: <%= ENV.fetch("RAILS_TEST_DATABASE_PATH", "storage/test.sqlite3") %>
 
 production:
   <<: *default

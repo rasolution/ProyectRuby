@@ -1,0 +1,308 @@
+body {
+  margin:0;
+  background:#f4f7fa;
+  color:#183347;
+  font:16px/1.5 system-ui,sans-serif;
+}
+#catalog-app * {
+  box-sizing:border-box;
+}
+#catalog-app .topbar {
+  background:#173c50;
+  color:#fff;
+  padding:1.1rem max(1rem,calc((100% - 1100px)/2));
+  display:flex;
+  justify-content:space-between;
+  gap:1rem;
+  align-items:center;
+}
+#catalog-app .brand {
+  color:white;
+  text-decoration:none;
+  font-size:1.15rem;
+  font-weight:750;
+}
+#catalog-app .brand:hover {
+  background:none;
+}
+#catalog-app .brand span {
+  color:#91d3d2;
+}
+#catalog-app #identity {
+  display:flex;
+  gap:1rem;
+  align-items:center;
+}
+#catalog-app main {
+  max-width:1132px;
+  margin:auto;
+  padding:2rem 1rem;
+}
+#catalog-app .eyebrow {
+  font-size:.7rem;
+  font-weight:750;
+  letter-spacing:.13em;
+  color:#31707d;
+  margin:0 0 .5rem;
+}
+#catalog-app h1 {
+  font-size:clamp(1.75rem,4vw,2.5rem);
+  letter-spacing:-.035em;
+  line-height:1.2;
+  margin:.5rem 0;
+}
+#catalog-app h2 {
+  font-size:1.45rem;
+}
+#catalog-app h3 {
+  font-size:1rem;
+}
+#catalog-app .page-heading {
+  margin-bottom:2rem;
+}
+#catalog-app .page-heading>p:last-child,#catalog-app .hint {
+  color:#5e7482;
+  font-size:.88rem;
+}
+#catalog-app .card {
+  background:#fff;
+  padding:1.5rem;
+  border:1px solid #d2dee6;
+  border-radius:.8rem;
+  margin:1rem 0;
+  max-width:700px;
+}
+#catalog-app .login-card {
+  max-width:430px;
+}
+#catalog-app label {
+  display:block;
+  font-weight:650;
+  font-size:.85rem;
+  margin:.9rem 0 .35rem;
+}
+#catalog-app input,#catalog-app select {
+  display:block;
+  font:inherit;
+  width:100%;
+  max-width:100%;
+  min-height:44px;
+  padding:.65rem .75rem;
+  background:#fff;
+  color:#183347;
+  border:1px solid #8fa6b5;
+  border-radius:.45rem;
+}
+#catalog-app button {
+  font:inherit;
+  font-weight:650;
+  min-height:44px;
+  padding:.6rem .95rem;
+  background:#006880;
+  color:#fff;
+  border:1px solid transparent;
+  border-radius:.45rem;
+  cursor:pointer;
+}
+#catalog-app button:hover {
+  background:#005369;
+}
+#catalog-app button.secondary {
+  background:#fff;
+  color:#1c5367;
+  border-color:#91acba;
+}
+#catalog-app button.secondary:hover {
+  background:#eaf2f6;
+}
+#catalog-app button.danger {
+  color:#9c2538;
+  border-color:#d5a9b1;
+}
+#catalog-app button.danger:hover {
+  background:#fff0f2;
+}
+#catalog-app button:disabled {
+  opacity:.55;
+  cursor:wait;
+}
+#catalog-app button:focus-visible,#catalog-app input:focus-visible,#catalog-app select:focus-visible,#catalog-app a:focus-visible {
+  outline:3px solid #b97b0f;
+  outline-offset:3px;
+}
+#catalog-app form>button {
+  margin-top:1.25rem;
+}
+#catalog-app .workspace-toolbar {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:1rem;
+  flex-wrap:wrap;
+  padding-bottom:1rem;
+  border-bottom:1px solid #ccdce5;
+}
+#catalog-app [role=tablist] {
+  display:flex;
+  gap:.4rem;
+  flex-wrap:wrap;
+}
+#catalog-app [role=tab] {
+  background:transparent;
+  color:#34596c;
+}
+#catalog-app [role=tab][aria-selected=true] {
+  background:#dcecf0;
+  color:#124e61;
+}
+#catalog-app .section-heading {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:1rem;
+  flex-wrap:wrap;
+  margin:1.5rem 0 1rem;
+}
+#catalog-app .section-heading h2 {
+  margin:0;
+}
+#catalog-app .section-heading p {
+  margin:.3rem 0 0;
+}
+#catalog-app .form-grid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:1rem;
+}
+#catalog-app .wide {
+  grid-column:1/-1;
+}
+#catalog-app .actions {
+  display:flex;
+  gap:.75rem;
+  align-items:center;
+  margin-top:1.2rem;
+}
+#catalog-app .table-scroll {
+  overflow:auto;
+  border:1px solid #d4e0e8;
+  background:#fff;
+  border-radius:.65rem;
+  margin-top:1rem;
+}
+#catalog-app table {
+  border-collapse:collapse;
+  width:100%;
+  text-align:left;
+  font-size:.9rem;
+}
+#catalog-app th,#catalog-app td {
+  padding:.85rem;
+  border-bottom:1px solid #e0e8ed;
+  overflow-wrap:anywhere;
+}
+#catalog-app th {
+  background:#e7f0f5;
+}
+#catalog-app .actions-cell {
+  min-width:195px;
+}
+#catalog-app .actions-cell button {
+  font-size:.8rem;
+  padding:.4rem .7rem;
+  margin-right:.35rem;
+}
+#catalog-app #search {
+  max-width:38rem;
+}
+#catalog-app .notice {
+  border:1px solid #b9d4d8;
+  background:#e7f3f2;
+  border-radius:.55rem;
+  padding:1rem;
+  white-space:pre-line;
+}
+#catalog-app .notice.error {
+  background:#fff1f2;
+  border-color:#deb2bb;
+  color:#8c2335;
+}
+#catalog-app footer {
+  border-top:1px solid #d4e0e8;
+  color:#637987;
+  font-size:.75rem;
+  margin-top:2rem;
+  padding-top:1rem;
+}
+#catalog-app [hidden] {
+  display:none!important;
+}
+#catalog-app .visually-hidden {
+  position:absolute;
+  width:1px;
+  height:1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+}
+@media(max-width:640px) {
+  #catalog-app .topbar {
+    align-items:flex-start;
+    flex-direction:column;
+  }
+  #catalog-app #identity {
+    width:100%;
+    justify-content:space-between;
+    flex-wrap:wrap;
+  }
+  #catalog-app .form-grid {
+    grid-template-columns:1fr;
+  }
+  #catalog-app .card {
+    padding:1rem;
+  }
+  #catalog-app .table-scroll thead {
+    position:absolute;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+    clip:rect(0,0,0,0);
+  }
+  #catalog-app tbody,#catalog-app tr,#catalog-app td {
+    display:block;
+  }
+  #catalog-app tr {
+    padding:.5rem;
+    border-bottom:1px solid #ccdbe4;
+  }
+  #catalog-app td {
+    display:flex;
+    align-items:baseline;
+    flex-wrap:wrap;
+    gap:.5rem;
+    border:0;
+    padding:.45rem;
+  }
+  #catalog-app td::before {
+    content:attr(data-label);
+    font-weight:650;
+    min-width:5rem;
+  }
+  #catalog-app .actions-cell {
+    min-width:0;
+  }
+  #catalog-app .workspace-toolbar>button {
+    width:100%;
+  }
+  #catalog-app .section-heading>button {
+    font-size:.85rem;
+  }
+  #catalog-app .actions-cell button {
+    margin:0;
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  #catalog-app * {
+    scroll-behavior:auto!important;
+    transition:none!important;
+  }
+}

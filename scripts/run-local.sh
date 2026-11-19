@@ -11,8 +11,14 @@ case "${1:-build}" in
     SECRET_KEY_BASE_DUMMY=1 bundle exec rails assets:precompile
     ;;
   test)
-    RAILS_ENV=test bundle exec rails db:prepare
-    bundle exec rails test test/integration/local_smoke_test.rb
+    export RAILS_ENV=test
+    if [ -z "${RAILS_TEST_DATABASE_PATH:-}" ]; then
+      test_dir=$(mktemp -d "${TMPDIR:-/tmp}/proyectruby-tests.XXXXXX")
+      export RAILS_TEST_DATABASE_PATH="$test_dir/test.sqlite3"
+      trap 'rm -f "$test_dir/test.sqlite3" "$test_dir/test.sqlite3-wal" "$test_dir/test.sqlite3-shm"; rmdir "$test_dir"' EXIT
+    fi
+    bundle exec rails db:prepare
+    bundle exec rails test
     ;;
   run)
     bundle exec rails db:prepare

@@ -1,11 +1,8 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  access_token: MyString
-  username: MyString
-  current: 2015-04-18 22:14:42
-
+  access_token: fixture-one-token
+  username: fixture-one
+  current: <%= 1.hour.ago.to_fs(:db) %>
 two:
-  access_token: MyString
-  username: MyString
-  current: 2015-04-18 22:14:42
+  access_token: fixture-two-token
+  username: fixture-two
+  current: <%= 1.hour.ago.to_fs(:db) %>

@@ -1,0 +1,38 @@
+es:
+  activerecord:
+    attributes:
+      user:
+        username: Usuario
+        password: Contraseña
+        password_confirmation: Confirmación
+        password_digest: Contraseña
+      product:
+        name: Nombre
+        price: Precio
+        state: Estado
+      transaction:
+        offert_product_id: Producto ofrecido
+        require_product_id: Producto solicitado
+        offered_product: Producto ofrecido
+        required_product: Producto solicitado
+  errors:
+    messages:
+      blank: es obligatorio
+      taken: ya existe
+      too_short: 'debe tener al menos %{count} caracteres'
+      too_long: 'admite hasta %{count} caracteres'
+      not_a_number: debe ser un número
+      not_an_integer: debe ser un entero
+      greater_than: 'debe ser mayor que %{count}'
+      greater_than_or_equal_to: 'debe ser mayor o igual que %{count}'
+      less_than_or_equal_to: 'debe ser menor o igual que %{count}'
+      confirmation: no coincide
+      password_too_long: no puede superar 72 bytes
+      restrict_dependent_destroy:
+        has_many: está relacionado con intercambios existentes
+  date:
+    formats:
+      default: '%d/%m/%Y'
+  time:
+    formats:
+      default: '%d/%m/%Y %H:%M'

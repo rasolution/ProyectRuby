@@ -76,6 +76,7 @@ GEM
       tzinfo (~> 2.0, >= 2.0.5)
       uri (>= 0.13.1)
     base64 (0.3.0)
+    bcrypt (3.1.22)
     bigdecimal (4.1.3)
     builder (3.3.0)
     coffee-rails (5.0.0)
@@ -247,6 +248,7 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
+  bcrypt (~> 3.1)
   coffee-rails (~> 5.0)
   jbuilder (~> 2.14)
   jquery-rails (~> 4.6)

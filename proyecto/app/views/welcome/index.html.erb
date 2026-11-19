@@ -1,15 +1,227 @@
-<form class="new_user" id="new_user" action="/login" method="post">
-
-  <div class="field">
-    <label for="user_username">Username</label><br>
-    <input type="text" name="user[username]" id="user_username" />
-  </div>
-  <div class="field">
-    <label for="user_password">Password</label><br>
-    <input type="text" name="user[password]" id="user_password" />
-  </div>
-  <div class="actions">
-    <input type="submit" name="commit" value="Create User" />
-  </div>
-</form>
-
+<div id="catalog-app">
+  <header class="topbar">
+    <span class="brand">
+      Productos e intercambios
+    </span>
+    <div id="identity" hidden>
+      <span id="username">
+      </span>
+      <button id="logout" class="secondary" type="button">
+        Cerrar sesión
+      </button>
+    </div>
+  </header>
+  <main>
+    <div class="page-heading">
+      <p class="eyebrow">
+        GESTIÓN LOCAL
+      </p>
+      <h1>
+        Tu catálogo y sus intercambios
+      </h1>
+      <p>
+        Administra productos y relaciona las ofertas desde un solo lugar.
+      </p>
+    </div>
+    <p id="message" class="notice" role="status" aria-live="polite" hidden>
+    </p>
+    <section id="login-panel" class="card login-card">
+      <h2>
+        Iniciar sesión
+      </h2>
+      <form id="login-form">
+        <label for="login-user">
+          Usuario
+        </label>
+        <input id="login-user" name="username" type="text" required autocomplete="username">
+        <label for="login-password">
+          Contraseña
+        </label>
+        <input id="login-password" name="password" type="password" required autocomplete="current-password">
+        <button type="submit">
+          Entrar
+        </button>
+      </form>
+    </section>
+    <div id="workspace" hidden>
+      <div class="workspace-toolbar">
+        <nav role="tablist" aria-label="Secciones">
+          <button id="tab-products" data-view="products" type="button" role="tab" aria-controls="products-panel" aria-selected="true" tabindex="0">
+            Productos
+          </button>
+          <button id="tab-transactions" data-view="transactions" type="button" role="tab" aria-controls="transactions-panel" aria-selected="false" tabindex="-1">
+            Intercambios
+          </button>
+          <button id="tab-account" data-view="account" type="button" role="tab" aria-controls="account-panel" aria-selected="false" tabindex="-1">
+            Mi cuenta
+          </button>
+        </nav>
+        <button id="refresh" class="secondary" type="button">
+          Actualizar datos
+        </button>
+      </div>
+      <section id="products-panel" role="tabpanel" aria-labelledby="tab-products">
+        <div class="section-heading">
+          <div>
+            <h2>
+              Productos
+            </h2>
+            <p id="product-count">
+            </p>
+          </div>
+          <button id="new-product" type="button">
+            Nuevo producto
+          </button>
+        </div>
+        <form id="product-form" class="card" hidden>
+          <h3 id="product-form-title">
+          </h3>
+          <input type="hidden" name="id">
+          <label for="product-name">
+            Nombre del producto
+          </label>
+          <input id="product-name" name="name" type="text" required maxlength="255">
+          <label for="product-price">
+            Precio entero
+          </label>
+          <input id="product-price" name="price" type="number" required min="0" max="2147483647" step="1">
+          <label for="product-state">
+            Código de estado
+          </label>
+          <input id="product-state" name="state" type="number" required min="0" max="2147483647" step="1" value="1">
+          <p class="hint">
+            Se conserva el precio entero del ejercicio.
+          </p>
+          <div class="actions">
+            <button type="submit">
+              Guardar producto
+            </button>
+            <button id="cancel-product" type="button" class="secondary">
+              Cancelar
+            </button>
+          </div>
+        </form>
+        <label for="search">
+          Buscar por nombre
+        </label>
+        <input id="search" type="search">
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">
+                  Nombre
+                </th>
+                <th scope="col">
+                  Precio
+                </th>
+                <th scope="col">
+                  Estado
+                </th>
+                <th scope="col">
+                  Acciones
+                </th>
+              </tr>
+            </thead>
+            <tbody id="product-rows">
+            </tbody>
+          </table>
+        </div>
+        <p id="products-empty" hidden>
+        </p>
+      </section>
+      <section id="transactions-panel" role="tabpanel" aria-labelledby="tab-transactions" hidden>
+        <div class="section-heading">
+          <div>
+            <h2>
+              Intercambios
+            </h2>
+            <p id="transaction-count">
+            </p>
+          </div>
+          <button id="new-transaction" type="button">
+            Nuevo intercambio
+          </button>
+        </div>
+        <form id="transaction-form" class="card" hidden>
+          <h3 id="transaction-form-title">
+          </h3>
+          <input type="hidden" name="id">
+          <label for="offered">
+            Producto ofrecido
+          </label>
+          <select id="offered" name="offert_product_id" required>
+          </select>
+          <label for="requested">
+            Producto solicitado
+          </label>
+          <select id="requested" name="require_product_id" required>
+          </select>
+          <div class="actions">
+            <button type="submit">
+              Guardar intercambio
+            </button>
+            <button id="cancel-transaction" class="secondary" type="button">
+              Cancelar
+            </button>
+          </div>
+        </form>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">
+                  Ofrecido
+                </th>
+                <th scope="col">
+                  Solicitado
+                </th>
+                <th scope="col">
+                  Acciones
+                </th>
+              </tr>
+            </thead>
+            <tbody id="transaction-rows">
+            </tbody>
+          </table>
+        </div>
+        <p id="transactions-empty" hidden>
+          Aún no hay intercambios.
+        </p>
+      </section>
+      <section id="account-panel" role="tabpanel" aria-labelledby="tab-account" hidden>
+        <h2>
+          Mi cuenta
+        </h2>
+        <p id="account-name">
+        </p>
+        <form id="password-form" class="card">
+          <h3>
+            Cambiar contraseña
+          </h3>
+          <label for="current-password">
+            Contraseña actual
+          </label>
+          <input id="current-password" name="password_challenge" type="password" required autocomplete="current-password">
+          <label for="new-password">
+            Nueva contraseña
+          </label>
+          <input id="new-password" name="password" type="password" required minlength="8" autocomplete="new-password">
+          <label for="confirm-password">
+            Confirmar nueva contraseña
+          </label>
+          <input id="confirm-password" name="password_confirmation" type="password" required autocomplete="new-password">
+          <p class="hint">
+            De 8 caracteres a 72 bytes. Al cambiarla tendrás que iniciar sesión de nuevo.
+          </p>
+          <button type="submit">
+            Cambiar contraseña
+          </button>
+        </form>
+      </section>
+    </div>
+    <footer>
+      Prototipo local. El catálogo se comparte entre las cuentas de esta instancia.
+    </footer>
+  </main>
+</div>

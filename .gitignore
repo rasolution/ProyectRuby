@@ -44,3 +44,5 @@ log/*.log
 /proyecto/storage/
 /proyecto/tmp/
 /proyecto/public/assets/
+/proyecto/log/*.log
+/proyecto/.ruby-lsp/

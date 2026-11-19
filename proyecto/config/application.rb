@@ -22,12 +22,16 @@ module Proyecto
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
 
-    config.middleware.insert_before 0, Rack::Cors do
-      allow do
-        origins '*'
-        resource '*', :headers => :any, :methods => [:get, :post, :options, :put]
+    allowed_origins = ENV.fetch('LOCAL_API_ALLOWED_ORIGINS', '').split(',').map(&:strip).reject(&:empty?)
+    if allowed_origins.any?
+      config.middleware.insert_before 0, Rack::Cors do
+        allow do
+          origins(*allowed_origins)
+          resource '*', headers: :any, methods: [:get, :post, :options, :put, :patch, :delete]
+        end
       end
     end
+    config.i18n.default_locale = :es
 
     config.load_defaults 8.1
 
